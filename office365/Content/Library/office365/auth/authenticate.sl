@@ -12,7 +12,6 @@ flow:
           - SUCCESS: encode_client_secret
           - FAILURE: on_failure
     - http_client_post:
-        worker_group: '${json}'
         do:
           io.cloudslang.base.http.http_client_post:
             - url: "${'https://login.microsoftonline.com/%s/oauth2/v2.0/token' % tenant_q}"
