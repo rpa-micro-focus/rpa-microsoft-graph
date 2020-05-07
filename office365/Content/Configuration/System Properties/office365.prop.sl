@@ -5,7 +5,7 @@
 ########################################################################################################################
 namespace: ''
 properties:
-  - tenant: ''
+  - tenant: rpamf.onmicrosoft.com
   - client_id: ''
   - client_secret:
       value: ''
@@ -14,7 +14,7 @@ properties:
       value: ''
       sensitive: false
   - proxy_host: ''
-  - proxy_port: ''
+  - proxy_port: '8080'
   - proxy_username: ''
   - proxy_password:
       value: ''

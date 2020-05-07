@@ -11,19 +11,18 @@ flow:
           - token
         navigate:
           - FAILURE: on_failure
-          - SUCCESS: http_client_get
-    - http_client_get:
+          - SUCCESS: http_graph_action
+    - http_graph_action:
         do:
-          io.cloudslang.base.http.http_client_get:
-            - url: "${'https://graph.microsoft.com/v1.0/users/%s/mailFolders' % user_principal_name}"
-            - auth_type: anonymous
-            - headers: "${'Authorization: Bearer ' + token}"
-            - content_type: application/json
+          office365._tools.http_graph_action:
+            - url: "${'/users/%s/mailFolders' % user_principal_name}"
+            - token: '${token}'
+            - method: GET
         publish:
           - json: '${return_result}'
         navigate:
-          - SUCCESS: SUCCESS
           - FAILURE: on_failure
+          - SUCCESS: SUCCESS
   outputs:
     - json: '${json}'
   results:
@@ -35,11 +34,11 @@ extensions:
       authenticate:
         x: 110
         'y': 102
-      http_client_get:
+      http_graph_action:
         x: 300
-        'y': 102
+        'y': 95
         navigate:
-          73cf73b4-7c40-cee9-6357-15280d6d1fba:
+          f5cb9d45-73b8-a8b4-b98f-1f77a2fba12a:
             targetId: 0de24e87-f841-d198-f608-1f8d4812b488
             port: SUCCESS
     results:

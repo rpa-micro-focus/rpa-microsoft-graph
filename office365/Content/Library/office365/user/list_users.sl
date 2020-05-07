@@ -9,19 +9,18 @@ flow:
           - token
         navigate:
           - FAILURE: on_failure
-          - SUCCESS: http_client_get
-    - http_client_get:
+          - SUCCESS: http_graph_action
+    - http_graph_action:
         do:
-          io.cloudslang.base.http.http_client_get:
-            - url: 'https://graph.microsoft.com/v1.0/users'
-            - auth_type: anonymous
-            - headers: "${'Authorization: Bearer ' + token}"
-            - content_type: application/json
+          office365._tools.http_graph_action:
+            - url: /users
+            - token: '${token}'
+            - method: GET
         publish:
           - json: '${return_result}'
         navigate:
-          - SUCCESS: SUCCESS
           - FAILURE: on_failure
+          - SUCCESS: SUCCESS
   outputs:
     - json: '${json}'
   results:
@@ -32,12 +31,12 @@ extensions:
     steps:
       authenticate:
         x: 110
-        'y': 102
-      http_client_get:
+        'y': 101
+      http_graph_action:
         x: 300
-        'y': 102
+        'y': 119
         navigate:
-          73cf73b4-7c40-cee9-6357-15280d6d1fba:
+          0d6410c8-cf40-3261-e842-8dd338ed2d10:
             targetId: 0de24e87-f841-d198-f608-1f8d4812b488
             port: SUCCESS
     results:

@@ -15,6 +15,12 @@ flow:
         do:
           io.cloudslang.base.http.http_client_post:
             - url: "${'https://login.microsoftonline.com/%s/oauth2/v2.0/token' % tenant_q}"
+            - proxy_host: "${get_sp('proxy_host')}"
+            - proxy_port: "${get_sp('proxy_port')}"
+            - proxy_username: "${get_sp('proxy_username')}"
+            - proxy_password:
+                value: "${get_sp('proxy_password')}"
+                sensitive: true
             - body: "${'client_id=%s&client_secret=%s&scope=https%%3A%%2F%%2Fgraph.microsoft.com%%2F.default&grant_type=client_credentials' % (client_id_q, client_secret_q)}"
             - content_type: application/x-www-form-urlencoded
         publish:
